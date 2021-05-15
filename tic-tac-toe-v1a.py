@@ -1,14 +1,4 @@
 from random import randint
-# MAIN VARIABLES
-board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
-banner = '\n### WELCOME TO TIC-TAC-TOE ###\n'
-numpad = '''
-Cell to Numkey mapping:
-
-1   2   3
-4   5   6
-7   8   9
-'''
 
 def display_board():
     print(board[1]+' | '+board[2]+' | '+board[3])
@@ -110,47 +100,61 @@ def play_again():
 
 ### MAIN GAME###
 
-# Display Welcome Screen
-welcome()
-# Ask Player choice
-player1,player2 = marker()
-# Ask if Player wants to start the Game.
-gameon = start_game()
-# Randomly pick player1 or player2 for first move
-move = first_move()
-# Gameover Checks
-boardfull = board_full()
-wincheck = win_check()
-# Main Game Core Loop
-while gameon:
-    # Ask player to make a move
-    if move == 'p1':
-        print('Player1 Turn: \n')
-        pos = marker_placement()
-        update_gameboard(pos,player1)
-        display_board()
-        boardfull = board_full()
-        wincheck = win_check()
-        if wincheck:
-            print('GAMEOVER - PLAYER 1 WON!! ')
-            break
-        elif boardfull:
-            print('GAMEOVER - TIE')
-            break
+while True:
+# MAIN VARIABLES
+    board = ['#',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    banner = '\n### WELCOME TO TIC-TAC-TOE ###\n'
+    numpad = '''
+    Cell to Numkey mapping:
+
+    1   2   3
+    4   5   6
+    7   8   9
+    '''
+    # Display Welcome Screen
+    welcome()
+    # Ask Player choice
+    player1,player2 = marker()
+    # Ask if Player wants to start the Game.
+    gameon = start_game()
+    # Randomly pick player1 or player2 for first move
+    move = first_move()
+    # Gameover Checks
+    boardfull = board_full()
+    wincheck = win_check()
+    # Main Game Core Loop
+    while gameon:
+        # Ask player to make a move
+        if move == 'p1':
+            print('Player1 Turn: \n')
+            pos = marker_placement()
+            update_gameboard(pos,player1)
+            display_board()
+            boardfull = board_full()
+            wincheck = win_check()
+            if wincheck:
+                print('GAMEOVER - PLAYER 1 WON!! ')
+                break
+            elif boardfull:
+                print('GAMEOVER - TIE')
+                break
+            else:
+                move = 'p2'
         else:
-            move = 'p2'
-    else:
-        print('Player2 Turn: \n')
-        pos = marker_placement()
-        update_gameboard(pos,player2)
-        display_board()
-        boardfull = board_full()
-        wincheck = win_check()
-        if wincheck:
-            print('GAMEOVER - PLAYER 2 WON!! ')
-            break
-        elif boardfull:
-            print('GAMEOVER - TIE')
-            break
-        else:
-            move = 'p1'
+            print('Player2 Turn: \n')
+            pos = marker_placement()
+            update_gameboard(pos,player2)
+            display_board()
+            boardfull = board_full()
+            wincheck = win_check()
+            if wincheck:
+                print('GAMEOVER - PLAYER 2 WON!! ')
+                break
+            elif boardfull:
+                print('GAMEOVER - TIE')
+                break
+            else:
+                move = 'p1'
+
+    if not play_again():
+        break
